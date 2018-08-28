@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Header from './Header';
+
 class App extends Component {
   constructor() {
     super();
@@ -57,6 +59,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <button onClick={this.playSound}>Play sound</button>
       </div>
     );
