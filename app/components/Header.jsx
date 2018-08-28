@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { Title } from '../styles';
+
 const Header = () => (
-  <div>
-    <h1>Hear the sounds of nature</h1>
-  </div>
+  <Title>Hear the sounds of nature</Title>
 );
 
 export default Header;

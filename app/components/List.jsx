@@ -2,6 +2,8 @@ import React from 'react';
 
 import noImage from '../images/noimage.jpg';
 
+import { Text, Title, Observation, UnstyledList } from '../styles';
+
 const List = ({ observations }) => {
   const list = observations.map((observation) => {
     const {
@@ -13,20 +15,18 @@ const List = ({ observations }) => {
     } = observation;
     if (taxonName) {
       return (
-        <li key={id}>
-          <h4>{taxonName}</h4>
-          <span>Seen by: {userName}</span>
-          <span>On: {date}</span>
+        <Observation key={id}>
+          <Title>{taxonName}</Title>
+          <Text>Seen by: {userName}</Text>
+          <Text>On: {date}</Text>
           <img src={photos.length > 0 ? photos[0].url : noImage} alt="user" width="100px" />
-        </li>
+        </Observation>
       );
     }
   });
 
   return (
-    <div>
-      <ul>{list}</ul>
-    </div>
+    <UnstyledList>{list}</UnstyledList>
   );
 };
 
