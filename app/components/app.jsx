@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Header from './Header';
+import List from './List';
+import PlaySounds from './PlaySounds';
 
 class App extends Component {
   constructor() {
@@ -20,7 +22,7 @@ class App extends Component {
 
   fetchObservations() {
     const url = 'https://api.inaturalist.org/v1/observations';
-    const params = '?order=desc&order_by=created_at&sounds=true&per_page=100'
+    const params = '?order=desc&order_by=created_at&sounds=true&per_page=100';
     axios.get(url + params)
       .then((response) => {
         const { results } = response.data;
@@ -30,19 +32,18 @@ class App extends Component {
 
         results.forEach((result) => {
           observations.push({
+            id: result.uuid,
+            date: result.observed_on,
             photos: result.photos,
+            sounds: result.sounds,
             taxonName: result.taxon ? result.taxon.name : null,
             userName: result.user.login,
-            userIcon: result.user.icon,
-            date: result.observed_on,
-            sounds: result.sounds,
           });
         });
 
         this.setState({
           observations,
         });
-        console.log(response.data.results);
         console.log(this.state.observations, 'observe');
       })
       .catch((err) => {
@@ -57,10 +58,14 @@ class App extends Component {
   }
 
   render() {
+    const {
+      observations,
+    } = this.state;
     return (
       <div>
         <Header />
-        <button onClick={this.playSound}>Play sound</button>
+        <List observations={observations} />
+        <PlaySounds onClick={this.playSound} />
       </div>
     );
   }

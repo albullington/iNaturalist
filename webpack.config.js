@@ -13,6 +13,14 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|jp(e*)g)$/,
+        loader: 'url-loader',
+        options: {
+          limit: '25000',
+          name: 'img/[name].[ext]',
+        },
+      },
     ],
   },
   resolve: {
