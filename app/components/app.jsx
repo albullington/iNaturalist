@@ -5,6 +5,10 @@ class App extends Component {
   constructor() {
     super();
 
+    this.state = {
+      observations: [],
+    };
+
     this.playSound = this.playSound.bind(this);
   }
 
@@ -17,7 +21,27 @@ class App extends Component {
     const params = '?order=desc&order_by=created_at&sounds=true&per_page=100'
     axios.get(url + params)
       .then((response) => {
-        console.log(response.data);
+        const { results } = response.data;
+        const {
+          observations,
+        } = this.state;
+
+        results.forEach((result) => {
+          observations.push({
+            photos: result.photos,
+            taxonName: result.taxon ? result.taxon.name : null,
+            userName: result.user.login,
+            userIcon: result.user.icon,
+            date: result.observed_on,
+            sounds: result.sounds,
+          });
+        });
+
+        this.setState({
+          observations,
+        });
+        console.log(response.data.results);
+        console.log(this.state.observations, 'observe');
       })
       .catch((err) => {
         if (err) throw err;
