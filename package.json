@@ -10,6 +10,7 @@
   "author": "Amanda Bullington",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "express": "^4.16.3",
     "nodemon": "^1.17.5",
