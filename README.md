@@ -1,11 +1,12 @@
-# Amanda's React Boilerplate
-Created a simple template for getting React projects using Babel, Webpack, and Airbnb Style Guide. This way, I don't need to rewrite the exact same config files everytime I want to build a new React project. 
+# iNaturalist Observations Search Tool
+This application allows users to filter and visualize observations using the iNaturalist Node API. Users can view the photo, taxon name, user, and date. 
 
 ## Getting Started
 
-* npm install
-* npm run compile
-* npm start
+1. Make sure that you have Node v8 or higher installed.
+2. Run `npm install` in order to install all dependencies listed in package.json.
+3. Run `npm run compile` to bundle React components using Webpack. 
+4. Finally, run `npm start` to see the app locally at `http://localhost:3002`.
 
 ## Authors
 

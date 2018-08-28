@@ -7,6 +7,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => res.send('Hello, client'));
 
-const port = 3001;
+const port = 3002;
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`));
