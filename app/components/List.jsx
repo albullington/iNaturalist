@@ -1,10 +1,20 @@
 import React from 'react';
 
 import noImage from '../images/noimage.jpg';
+import loadingIcon from '../images/loading.gif';
 
 import { Text, Title, Observation, UnstyledList } from '../styles';
 
-const List = ({ observations }) => {
+const imgStyle = {
+  display: 'block',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  width: '50%',
+};
+
+const List = ({ loading, observations }) => {
+  let content;
+
   const list = observations.map((observation) => {
     const {
       date,
@@ -25,8 +35,16 @@ const List = ({ observations }) => {
     }
   });
 
+  if (loading) {
+    content = <img src={loadingIcon} alt="loading" style={imgStyle} />;
+  } else {
+    content = <UnstyledList>{list}</UnstyledList>;
+  }
+
   return (
-    <UnstyledList>{list}</UnstyledList>
+    <div>
+      {content}
+    </div>
   );
 };
 
