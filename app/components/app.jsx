@@ -34,6 +34,7 @@ class App extends Component {
         date: result.observed_on,
         photos: result.photos,
         location: result.place_guess,
+        species: result.species_guess,
         sounds: result.sounds,
         taxonName: result.taxon ? result.taxon.name : null,
         uri: result.uri,
@@ -46,7 +47,7 @@ class App extends Component {
 
   fetchObservations(additionalParams) {
     const url = 'https://api.inaturalist.org/v1/observations';
-    const params = '?order=desc&order_by=created_at&per_page=100&sounds=true';
+    const params = '?order=desc&order_by=created_at&per_page=12&sounds=true';
     axios.get(url + params + additionalParams)
       .then((response) => {
         const { results } = response.data;
@@ -56,7 +57,6 @@ class App extends Component {
           loading: false,
           observations,
         });
-        console.log(results, 'results');
       })
       .catch((err) => {
         if (err) throw err;

@@ -33,6 +33,7 @@ export const Button = styled.button`
   background: #3DA35D;
   color: #E8FCCF;
   font-size: 16px;
+  margin-top: 20px;
   margin-left: 40px;
   white-space: nowrap;
   padding: 0.25em 1em;

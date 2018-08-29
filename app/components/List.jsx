@@ -30,6 +30,7 @@ const List = ({
       id,
       location,
       photos,
+      species,
       sounds,
       taxonName,
       uri,
@@ -38,9 +39,11 @@ const List = ({
     if (taxonName && sounds[0].file_url !== null) {
       return (
         <Observation key={id}>
+          {value !== '' ? <Text>Filter: {value}</Text> : null}
           <Title>{taxonName}</Title>
           <Text>Heard by user {userName} on {date}</Text>
           <Text>Near {location}</Text>
+          <Text>Common name: {species === taxonName ? 'none' : species}</Text>
           <a href={uri}>
             <img src={photos.length > 0 ? photos[0].url : noImage} alt="user" width="100px" />
           </a>
@@ -51,16 +54,13 @@ const List = ({
   });
 
   if (loading) {
-    filter = 'Loading';
     content = <img src={loadingIcon} alt="loading" style={imgStyle} />;
   } else {
-    filter = `${value} observations`;
     content = <UnstyledList>{list}</UnstyledList>;
   }
 
   return (
     <div>
-      <Title>{filter}</Title>
       <Button onClick={lastPage}>Last Page</Button>
       <Button onClick={nextPage}>Next Page</Button>
       {content}
