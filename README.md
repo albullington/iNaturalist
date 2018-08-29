@@ -3,10 +3,11 @@ This application allows users to filter and visualize observations using the iNa
 
 ## Getting Started
 
-1. Make sure that you have Node v8 or higher installed.
+1. Make sure that you have Node v8 or higher installed, along with the npm package manager.
 2. Run `npm install` in order to install all dependencies listed in package.json.
 3. Run `npm run compile` to bundle React components using Webpack. 
 4. Finally, run `npm start` to see the app locally at `http://localhost:3002`.
+5. Alternatively, you can view the app live on[GitHub Pages](https://albullington.github.io/iNaturalist/public/). 
 
 ## The App
 
