@@ -32,6 +32,7 @@ class App extends Component {
         photos: result.photos,
         sounds: result.sounds,
         taxonName: result.taxon ? result.taxon.name : null,
+        uri: result.uri,
         userName: result.user.login,
       });
     });
@@ -71,10 +72,10 @@ class App extends Component {
     this.fetchObservationsWithNewParams(params);
   }
 
-  // showObservationsWithSounds() {
-  //   const params = '&sounds=true';
-  //   this.fetchObservationsWithNewParams(params);
-  // }
+  showNearby(latitude, longitude) {
+    const params = `&lat=${latitude}&lng=${longitude}&radius=${100}`;
+    this.fetchObservationsWithNewParams(params);
+  }
 
   showPopular() {
     const params = '&popular=true';
@@ -91,14 +92,31 @@ class App extends Component {
     this.fetchObservationsWithNewParams(params);
   }
 
+  getUserGeolocation() {
+    if (window.navigator.geolocation) {
+      const success = (position) => {
+        const {
+          latitude,
+          longitude,
+        } = position.coords;
+        console.log(latitude, longitude);
+        this.showNearby(latitude, longitude);
+      };
+      const failure = (message) => {
+        alert('Cannot retrieve your location');
+      };
+      navigator.geolocation.getCurrentPosition(success, failure, {
+        maximumAge: Infinity,
+        timeout: 5000
+      });
+    }
+  }
+
   addParameters() {
     const {
       value,
     } = this.state;
 
-    // if (value === 'sound') {
-    //   this.showObservationsWithSounds();
-    // }
     if (value === 'native') {
       this.showNativeSpecies();
     }
@@ -110,6 +128,9 @@ class App extends Component {
     }
     if (value === 'threatened') {
       this.showThreatened();
+    }
+    if (value === 'location') {
+      this.getUserGeolocation();
     }
   }
 

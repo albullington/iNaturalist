@@ -29,6 +29,7 @@ const List = ({
       photos,
       sounds,
       taxonName,
+      uri,
       userName,
     } = observation;
     if (taxonName && sounds[0].file_url !== null) {
@@ -37,7 +38,9 @@ const List = ({
           <Title>{taxonName}</Title>
           <Text>Seen by: {userName}</Text>
           <Text>On: {date}</Text>
-          <img src={photos.length > 0 ? photos[0].url : noImage} alt="user" width="100px" />
+          <a href={uri}>
+            <img src={photos.length > 0 ? photos[0].url : noImage} alt="user" width="100px" />
+          </a>
           <Button onClick={onClick} value={id}>Play sound</Button>
         </Observation>
       );
@@ -48,7 +51,7 @@ const List = ({
     filter = 'Loading';
     content = <img src={loadingIcon} alt="loading" style={imgStyle} />;
   } else {
-    filter = `${value} + observations`;
+    filter = `${value} observations`;
     content = <UnstyledList>{list}</UnstyledList>;
   }
 

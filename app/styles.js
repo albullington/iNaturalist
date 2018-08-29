@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const HeaderTitle = styled.h1`
+  color: #134611;
+  font-family: 'Open Sans', sans-serif;
+`;
+
 export const Title = styled.h4`
   color: #134611;
   font-family: 'Open Sans', sans-serif;

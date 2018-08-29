@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Title } from '../styles';
+import { Text, HeaderTitle } from '../styles';
 
 const Header = ({ handleChange, value }) => (
   <div>
-    <Title>Hear the sounds of nature</Title>
+    <HeaderTitle>Listen to the sounds of nature</HeaderTitle>
+    <Text>Click on more than one sound at once to hear the cacaphony of nature!</Text>
+    <Text>Alternatively, click an animal/plant image to view the original observation on iNaturalist.</Text>
     <div>
       <form>
         <select value={value} onChange={handleChange}>
           <option>Select filter:</option>
-          <option value="native">Native</option>
-          <option value="popular">Popular</option>
-          <option value="quality">Quality</option>
-          <option value="sound">Sound</option>
-          <option value="threatened">Threatened</option>
+          <option value="location">Nearby Location</option>
+          <option value="native">Native Species</option>
+          <option value="popular">Popular Observations</option>
+          <option value="quality">Research-Grade Quality</option>
+          <option value="threatened">Threatened Species</option>
         </select>
       </form>
     </div>
