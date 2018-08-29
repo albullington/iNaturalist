@@ -9,13 +9,16 @@ class App extends Component {
     super();
 
     this.state = {
-      observations: [],
       loading: false,
+      observations: [],
+      page: 1,
       value: '',
     };
 
-    this.playSound = this.playSound.bind(this);
+    this.fetchLastPage = this.fetchLastPage.bind(this);
+    this.fetchNextPage = this.fetchNextPage.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.playSound = this.playSound.bind(this);
   }
 
   componentDidMount() {
@@ -50,9 +53,10 @@ class App extends Component {
         const observations = this.createObservationsList(results);
 
         this.setState({
-          observations,
           loading: false,
+          observations,
         });
+        console.log(results, 'results');
       })
       .catch((err) => {
         if (err) throw err;
@@ -164,6 +168,40 @@ class App extends Component {
     }, 4000);
   }
 
+  fetchNextPage() {
+    let {
+      page,
+    } = this.state;
+
+    page += 1;
+
+    const params = `&page=${page}`;
+    this.fetchObservationsWithNewParams(params);
+
+    this.setState({
+      page,
+    });
+  }
+
+  fetchLastPage() {
+    let {
+      page,
+    } = this.state;
+
+    if (page > 1) {
+      page -= 1;
+    } else {
+      page = 1;
+    }
+
+    const params = `&page=${page}`;
+    this.fetchObservationsWithNewParams(params);
+
+    this.setState({
+      page,
+    });
+  }
+
   render() {
     const {
       observations,
@@ -177,10 +215,12 @@ class App extends Component {
           value={value}
         />
         <List
-          value={value}
+          lastPage={this.fetchLastPage}
           loading={loading}
+          nextPage={this.fetchNextPage}
           observations={observations}
           onClick={this.playSound}
+          value={value}
         />
       </div>
     );

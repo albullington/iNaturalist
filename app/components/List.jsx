@@ -14,7 +14,9 @@ const imgStyle = {
 };
 
 const List = ({
+  lastPage,
   loading,
+  nextPage,
   observations,
   onClick,
   value,
@@ -59,20 +61,26 @@ const List = ({
   return (
     <div>
       <Title>{filter}</Title>
+      <Button onClick={lastPage}>Last Page</Button>
+      <Button onClick={nextPage}>Next Page</Button>
       {content}
     </div>
   );
 };
 
 List.propTypes = {
+  lastPage: PropTypes.func,
   loading: PropTypes.bool,
+  nextPage: PropTypes.func,
   observations: PropTypes.arrayOf(PropTypes.object),
   onClick: PropTypes.func,
   value: PropTypes.string,
 };
 
 List.defaultProps = {
+  lastPage: () => null,
   loading: false,
+  nextPage: () => null,
   observations: [],
   onClick: () => null,
   value: '',
