@@ -21,7 +21,8 @@ export const Observation = styled.li`
   padding: 20px 20px 20px 20px;
   margin-right: 20px;
   margin-bottom: 20px;
-  width: 200px;
+  width: 300px;
+  background-color: #B2E898;
 `;
 
 export const Text = styled.p`
@@ -32,7 +33,7 @@ export const Button = styled.button`
   background: #3DA35D;
   color: #E8FCCF;
   font-size: 16px;
-  margin-top: 10px;
+  margin-left: 40px;
   white-space: nowrap;
   padding: 0.25em 1em;
   border: 1px solid #393E41;

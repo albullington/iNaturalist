@@ -26,6 +26,7 @@ const List = ({
     const {
       date,
       id,
+      location,
       photos,
       sounds,
       taxonName,
@@ -36,8 +37,8 @@ const List = ({
       return (
         <Observation key={id}>
           <Title>{taxonName}</Title>
-          <Text>Seen by: {userName}</Text>
-          <Text>On: {date}</Text>
+          <Text>Heard by user {userName} on {date}</Text>
+          <Text>Near {location}</Text>
           <a href={uri}>
             <img src={photos.length > 0 ? photos[0].url : noImage} alt="user" width="100px" />
           </a>

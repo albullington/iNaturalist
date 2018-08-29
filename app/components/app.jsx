@@ -30,6 +30,7 @@ class App extends Component {
         id: result.uuid,
         date: result.observed_on,
         photos: result.photos,
+        location: result.place_guess,
         sounds: result.sounds,
         taxonName: result.taxon ? result.taxon.name : null,
         uri: result.uri,
@@ -52,7 +53,6 @@ class App extends Component {
           observations,
           loading: false,
         });
-        console.log(this.state.observations, 'results');
       })
       .catch((err) => {
         if (err) throw err;
@@ -93,13 +93,17 @@ class App extends Component {
   }
 
   getUserGeolocation() {
+    this.setState({
+      loading: true,
+    });
+
     if (window.navigator.geolocation) {
       const success = (position) => {
         const {
           latitude,
           longitude,
         } = position.coords;
-        console.log(latitude, longitude);
+
         this.showNearby(latitude, longitude);
       };
       const failure = (message) => {
@@ -107,7 +111,7 @@ class App extends Component {
       };
       navigator.geolocation.getCurrentPosition(success, failure, {
         maximumAge: Infinity,
-        timeout: 5000
+        timeout: 5000,
       });
     }
   }
