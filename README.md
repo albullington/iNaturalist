@@ -1,5 +1,5 @@
-# iNaturalist Observations Search Tool
-This application allows users to filter and visualize observations using the iNaturalist Node API. Users can view the photo, taxon name, user, and date. 
+# Listen to Nature Observations
+This application allows users to filter and visualize observations using the iNaturalist Node API. Best of all, it comes with built in audio so you can listen to each observation. 
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ This application allows users to filter and visualize observations using the iNa
 
 ## The App
 
-![Listen to nature](https://github.com/albullington/iNaturalist/app/images/app-screenshot.png)
+![Listen to nature](https://github.com/albullington/iNaturalist/blob/master/app/images/app-screenshot.png)
 
 Use the selection menu to filter observations by geolocation, native species, threatened species, popular observations, and research quality-grade observations.
 
