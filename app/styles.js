@@ -23,3 +23,13 @@ export const Text = styled.p`
   font-family: 'Open Sans', sans-serif;
 `;
 
+export const Button = styled.button`
+  background: #3DA35D;
+  color: #E8FCCF;
+  font-size: 16px;
+  margin-top: 10px;
+  white-space: nowrap;
+  padding: 0.25em 1em;
+  border: 1px solid #393E41;
+  border-radius: 3px;
+`;

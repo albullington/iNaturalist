@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchObservations();
+    this.fetchObservations('');
   }
 
   createObservationsList(results) {
@@ -134,6 +134,9 @@ class App extends Component {
     }
     const audio = new Audio(audioURL);
     audio.play();
+    setTimeout(() => {
+      audio.pause();
+    }, 4000);
   }
 
   render() {

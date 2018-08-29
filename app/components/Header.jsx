@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Title } from '../styles';
 
@@ -19,5 +20,16 @@ const Header = ({ handleChange, value }) => (
     </div>
   </div>
 );
+
+Header.propTypes = {
+  handleChange: PropTypes.func,
+  value: PropTypes.string,
+};
+
+Header.defaultProps = {
+  handleChange: () => null,
+  value: '',
+};
+
 
 export default Header;

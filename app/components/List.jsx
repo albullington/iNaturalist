@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import noImage from '../images/noimage.jpg';
 import loadingIcon from '../images/loading.gif';
 
-import { Text, Title, Observation, UnstyledList } from '../styles';
+import { Button, Text, Title, Observation, UnstyledList } from '../styles';
 
 const imgStyle = {
   display: 'block',
@@ -12,7 +13,12 @@ const imgStyle = {
   width: '50%',
 };
 
-const List = ({ loading, observations, onClick, value }) => {
+const List = ({
+  loading,
+  observations,
+  onClick,
+  value,
+}) => {
   let content;
   let filter;
 
@@ -25,14 +31,14 @@ const List = ({ loading, observations, onClick, value }) => {
       taxonName,
       userName,
     } = observation;
-    if (taxonName && sounds.length > 0) {
+    if (taxonName && sounds[0].file_url !== null) {
       return (
         <Observation key={id}>
           <Title>{taxonName}</Title>
           <Text>Seen by: {userName}</Text>
           <Text>On: {date}</Text>
           <img src={photos.length > 0 ? photos[0].url : noImage} alt="user" width="100px" />
-          <button onClick={onClick} value={id}>Play sound</button>
+          <Button onClick={onClick} value={id}>Play sound</Button>
         </Observation>
       );
     }
@@ -42,7 +48,7 @@ const List = ({ loading, observations, onClick, value }) => {
     filter = 'Loading';
     content = <img src={loadingIcon} alt="loading" style={imgStyle} />;
   } else {
-    filter = value + ' observations';
+    filter = `${value} + observations`;
     content = <UnstyledList>{list}</UnstyledList>;
   }
 
@@ -52,6 +58,20 @@ const List = ({ loading, observations, onClick, value }) => {
       {content}
     </div>
   );
+};
+
+List.propTypes = {
+  loading: PropTypes.bool,
+  observations: PropTypes.arrayOf(PropTypes.object),
+  onClick: PropTypes.func,
+  value: PropTypes.string,
+};
+
+List.defaultProps = {
+  loading: false,
+  observations: [],
+  onClick: () => null,
+  value: '',
 };
 
 export default List;
