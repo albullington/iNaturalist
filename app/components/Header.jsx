@@ -2,20 +2,19 @@ import React from 'react';
 
 import { Title } from '../styles';
 
-const Header = ({ handleChange, handleSubmit, value }) => (
+const Header = ({ handleChange, value }) => (
   <div>
     <Title>Hear the sounds of nature</Title>
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <select value={value} onChange={handleChange}>
           <option>Select filter:</option>
-          <option value="location">Location</option>
-          <option value="sound">Sound</option>
           <option value="native">Native</option>
           <option value="popular">Popular</option>
-          <option value="recent">Recent</option>
+          <option value="quality">Quality</option>
+          <option value="sound">Sound</option>
+          <option value="threatened">Threatened</option>
         </select>
-        <input type="submit" />
       </form>
     </div>
   </div>

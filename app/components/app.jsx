@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Header from './Header';
 import List from './List';
-import PlaySounds from './PlaySounds';
 
 class App extends Component {
   constructor() {
@@ -17,7 +16,6 @@ class App extends Component {
 
     this.playSound = this.playSound.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +30,6 @@ class App extends Component {
         id: result.uuid,
         date: result.observed_on,
         photos: result.photos,
-        native: result.native,
         sounds: result.sounds,
         taxonName: result.taxon ? result.taxon.name : null,
         userName: result.user.login,
@@ -44,7 +41,7 @@ class App extends Component {
 
   fetchObservations(additionalParams) {
     const url = 'https://api.inaturalist.org/v1/observations';
-    const params = '?order=desc&order_by=created_at&per_page=100';
+    const params = '?order=desc&order_by=created_at&per_page=100&sounds=true';
     axios.get(url + params + additionalParams)
       .then((response) => {
         const { results } = response.data;
@@ -54,60 +51,88 @@ class App extends Component {
           observations,
           loading: false,
         });
-        console.log(this.state.observations, 'observe');
+        console.log(this.state.observations, 'results');
       })
       .catch((err) => {
         if (err) throw err;
       });
   }
 
-  showNativeSpecies() {
-    const params = '&native=true';
-
+  fetchObservationsWithNewParams(params) {
     this.setState({
       loading: true,
     });
+
     this.fetchObservations(params);
   }
 
-  showObservationsWithSounds() {
-    const params = '&sounds=true';
+  showNativeSpecies() {
+    const params = '&native=true';
+    this.fetchObservationsWithNewParams(params);
+  }
 
-    this.setState({
-      loading: true,
-    });
+  // showObservationsWithSounds() {
+  //   const params = '&sounds=true';
+  //   this.fetchObservationsWithNewParams(params);
+  // }
 
-    this.fetchObservations(params);
+  showPopular() {
+    const params = '&popular=true';
+    this.fetchObservationsWithNewParams(params);
+  }
+
+  showResearchQuality() {
+    const params = '&quality_grade=research';
+    this.fetchObservationsWithNewParams(params);
+  }
+
+  showThreatened() {
+    const params = '&threatened=true';
+    this.fetchObservationsWithNewParams(params);
   }
 
   addParameters() {
     const {
       value,
     } = this.state;
-    console.log(value, 'handleSubmit');
 
-    if (value === 'sound') {
-      this.showObservationsWithSounds();
-    }
+    // if (value === 'sound') {
+    //   this.showObservationsWithSounds();
+    // }
     if (value === 'native') {
       this.showNativeSpecies();
+    }
+    if (value === 'popular') {
+      this.showPopular();
+    }
+    if (value === 'quality') {
+      this.showResearchQuality();
+    }
+    if (value === 'threatened') {
+      this.showThreatened();
     }
   }
 
   handleChange(e) {
     this.setState({
       value: e.target.value.toLowerCase(),
-    });
+    }, () => this.addParameters());
   }
 
-  handleSubmit(e) {
-    this.addParameters();
-    e.preventDefault();
-  }
+  playSound(e) {
+    const {
+      observations,
+    } = this.state;
 
-  playSound() {
-    const audio = new Audio('https://static.inaturalist.org/sounds/25393.x-m4a?1535421964');
-    audio.loop = true;
+    const audioID = e.target.value;
+    let audioURL = '';
+
+    for (let i = 0; i < observations.length; i++) {
+      if (observations[i].id === audioID) {
+        audioURL = observations[i].sounds[0].file_url;
+      }
+    }
+    const audio = new Audio(audioURL);
     audio.play();
   }
 
@@ -121,14 +146,14 @@ class App extends Component {
       <div>
         <Header
           handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
           value={value}
         />
         <List
+          value={value}
           loading={loading}
           observations={observations}
+          onClick={this.playSound}
         />
-        <PlaySounds onClick={this.playSound} />
       </div>
     );
   }
